@@ -1,15 +1,15 @@
 var mongoose = require('mongoose');
 const studentSchema = new mongoose.Schema({
-    Name:String,
-    Admin_no:Number,
-    Dept:String,
-    Sem:Number,
-    Tutor:String,
-    Email:String,
-    Image:String,
-    Parent_No:Number,
-    Password:String,
-    Phone:Number,
+   name:String,
+    admNo:Number,
+    dept:String,
+    sem:Number,
+    tutorName:String,
+    email:String,
+    image:String,
+    parent_No:Number,
+    password:String,
+    phone:Number
     
 });
 const Student = mongoose.model('Student', studentSchema);
