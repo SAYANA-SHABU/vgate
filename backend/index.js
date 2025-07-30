@@ -2,21 +2,49 @@ const express=require("express")
 const app = express()
 const QRCode = require('qrcode');
 app.use(express.json());
+const Student = require('./models/student');
+var cors = require('cors')
+app.use(cors());
+const multer = require('multer');
+const connectDB =require('./connection')
+connectDB
 
-app.post('/register', async (req, res) => {
+
+const storage = multer.memoryStorage(); // Or use diskStorage if saving to disk
+const upload = multer({ storage });
+
+
+app.post('/register', upload.single('image'), async (req, res) => {
   try {
-    const student = new Student(req.body);
+    const { admNo, name, dept, sem, tutorName, phone, email, password } = req.body;
+
+    const student = new Student({
+      admNo,
+      name,
+      dept,
+      sem,
+      tutorName,
+      phone,
+      email,
+      password,
+      image: req.file ? req.file.buffer : undefined, // Save as Buffer
+    });
+
     await student.save();
     res.send({ message: 'Student registered successfully' });
   } catch (error) {
+    console.error('Registration error:', error);
     res.status(500).send({ message: 'Registration failed', error });
   }
 });
 
 // Login route
 app.post('/login', async (req, res) => {
-  const { admissionNo, password } = req.body;
-  const student = await Student.findOne({ admissionNo, password });
+   const admNo = Number(req.body.admNo); 
+    const { password } = req.body;
+  console.log("Login attempt with:", admNo, password);
+
+  const student = await Student.findOne({ admNo, password });
   if (student) {
     res.send({ message: 'Login successful', student });
   } else {
@@ -47,6 +75,6 @@ app.post('/generate-qr/:id', async (req, res) => {
   }
 });
 
-app.listen(2025,() => {
+app.listen(5000,() => {
   console.log("Port is running ")
 })
