@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function Login({ onLogin }) {
-  const [credentials, setCredentials] = useState('');
+  const [credentials, setCredentials] = useState({
+  admNo: '',
+  password: ''
+});
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -22,7 +25,7 @@ function Login({ onLogin }) {
   return (
     <div>
       <h3>Login</h3>
-      <input type="text" name="admissionNo" placeholder="Admission No" onChange={handleChange} /><br />
+      <input type="text" name="admNo" placeholder="Admission No" onChange={handleChange} /><br />
       <input type="password" name="password" placeholder="Password" onChange={handleChange} /><br />
       <button onClick={handleLogin}>Login</button>
     </div>
