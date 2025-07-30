@@ -190,7 +190,7 @@ export const Header = () => {
               ACCESS MENU
             </Typography>
             
-            <MenuItem 
+            <Link to="/l"><MenuItem 
               onClick={handleClose}
               sx={{
                 fontSize: { xs: '0.8rem', sm: '0.9rem' },
@@ -203,7 +203,7 @@ export const Header = () => {
             >
               Student Portal
             </MenuItem>
-            <MenuItem 
+            </Link><MenuItem 
               onClick={handleClose}
               sx={{
                 fontSize: { xs: '0.8rem', sm: '0.9rem' },
