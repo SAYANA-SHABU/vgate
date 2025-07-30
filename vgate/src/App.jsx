@@ -6,6 +6,7 @@ import About from './component/About'
 import Header from './component/Header'
 import Layout from './component/Layout'
 import Footer from './component/Footer'
+import Login from './component/Login';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,7 +28,7 @@ function App() {
           }
         />
 
-        
+       <Route path="/l" element={<Login />} /> 
         <Route path="/r" element={<RegisterForm />} />
       </Routes>
     </Router>
